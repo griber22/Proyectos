@@ -1,0 +1,159 @@
+#include <stdio.h>
+
+int main() {
+    // Bloque declarativo de constantes
+    int MAXPERSONAS = 10;
+
+    // Bloque declarativo de variables
+    int yogaOcupados, pilatesOcupados, spinningOcupados;
+    int opcion1, espacioDisponible, totalReservas, totalCancelaciones;
+    char opcion;
+
+    // Inicialización de variables
+    yogaOcupados = 0;
+    pilatesOcupados = 0;
+    spinningOcupados = 0;
+    totalReservas = 0;
+    totalCancelaciones = 0;
+
+    printf("Menú de Gestión de Clases en el Gimnasio\n");
+
+    do {
+        printf("\n1. Reservar clase\n");
+        printf("2. Cancelar reserva\n");
+        printf("3. Mostrar estado de clases\n");
+        printf("0. Salir\n");
+        printf("\nSeleccione una opción: ");
+        scanf("%d", &opcion1);
+
+        while ((opcion1 < 0) || (opcion1 > 3)) {
+            printf("\nOpción no válida. Intente de nuevo.\n");
+            printf("1. Reservar clase\n");
+            printf("2. Cancelar reserva\n");
+            printf("3. Mostrar estado de clases\n");
+            printf("0. Salir\n");
+            printf("Seleccione una opción: ");
+            scanf("%d", &opcion1);
+        }
+
+        switch (opcion1) {
+            case 1: // Sección para reservar clases
+                printf("\nSeleccione la clase a reservar\n");
+                printf("Y/y. Yoga\n");
+                printf("P/p. Pilates\n");
+                printf("S/s. Spinning\n");
+                printf("\nSeleccione una clase: ");
+                scanf(" %c", &opcion);
+
+                switch (opcion) {
+                    case 'Y': case 'y':
+                        espacioDisponible = MAXPERSONAS - yogaOcupados;
+                        if (espacioDisponible > 0) {
+                            yogaOcupados++;
+                            totalReservas++;
+                            printf("Reserva realizada con éxito en Yoga. Espacios ocupados: %d\n", yogaOcupados);
+                        } else {
+                            printf("Lo siento, no hay espacios disponibles en Yoga.\n");
+                        }
+                        break;
+
+                    case 'P': case 'p':
+                        espacioDisponible = MAXPERSONAS - pilatesOcupados;
+                        if (espacioDisponible > 0) {
+                            pilatesOcupados++;
+                            totalReservas++;
+                            printf("Reserva realizada con éxito en Pilates. Espacios ocupados: %d\n", pilatesOcupados);
+                        } else {
+                            printf("Lo siento, no hay espacios disponibles en Pilates.\n");
+                        }
+                        break;
+
+                    case 'S': case 's':
+                        espacioDisponible = MAXPERSONAS - spinningOcupados;
+                        if (espacioDisponible > 0) {
+                            spinningOcupados++;
+                            totalReservas++;
+                            printf("Reserva realizada con éxito en Spinning. Espacios ocupados: %d\n", spinningOcupados);
+                        } else {
+                            printf("Lo siento, no hay espacios disponibles en Spinning.\n");
+                        }
+                        break;
+
+                    default:
+                        printf("\nXXX-Opción no válida-XXX. Intente de nuevo.\n");
+                        break;
+                }
+                break;
+
+            case 2: // Sección para cancelar clases
+                printf("\nSeleccione la clase a cancelar:\n");
+                printf("Y/y. Yoga\n");
+                printf("P/p. Pilates\n");
+                printf("S/s. Spinning\n");
+                printf("Seleccione una opción: ");
+                scanf(" %c", &opcion);
+
+                switch (opcion) {
+                    case 'Y': case 'y':
+                        if (yogaOcupados > 0) {
+                            yogaOcupados--;
+                            totalCancelaciones++;
+                            printf("Reserva cancelada en Yoga. Espacios ocupados: %d\n", yogaOcupados);
+                        } else {
+                            printf("No hay reservas para cancelar en Yoga.\n");
+                        }
+                        break;
+
+                    case 'P': case 'p':
+                        if (pilatesOcupados > 0) {
+                            pilatesOcupados--;
+                            totalCancelaciones++;
+                            printf("Reserva cancelada en Pilates. Espacios ocupados: %d\n", pilatesOcupados);
+                        } else {
+                            printf("No hay reservas para cancelar en Pilates.\n");
+                        }
+                        break;
+
+                    case 'S': case 's':
+                        if (spinningOcupados > 0) {
+                            spinningOcupados--;
+                            totalCancelaciones++;
+                            printf("Reserva cancelada en Spinning. Espacios ocupados: %d\n", spinningOcupados);
+                        } else {
+                            printf("No hay reservas para cancelar en Spinning.\n");
+                        }
+                        break;
+
+                    default:
+                        printf("Opción de clase no válida. Intente de nuevo.\n");
+                        break;
+                }
+                break;
+
+            case 3: // Sección para mostrar estado de clases
+                printf("\nEstado de las clases:\n");
+                printf("Yoga: %d/%d ocupados\n", yogaOcupados, MAXPERSONAS);
+                printf("Pilates: %d/%d ocupados\n", pilatesOcupados, MAXPERSONAS);
+                printf("Spinning: %d/%d ocupados\n", spinningOcupados, MAXPERSONAS);
+                break;
+
+            case 0: // Opción de salir
+                printf("\nSaliendo del sistema.\n");
+                break;
+
+            default:
+                printf("\nXXX-Opción no válida-XXX. Intente de nuevo.\n");
+                break;
+        }
+    } while (opcion1 != 0);
+
+    // Salidas finales
+    printf("\nEstado final de las clases:\n");
+    printf("Yoga: %d/%d ocupados\n", yogaOcupados, MAXPERSONAS);
+    printf("Pilates: %d/%d ocupados\n", pilatesOcupados, MAXPERSONAS);
+    printf("Spinning: %d/%d ocupados\n", spinningOcupados, MAXPERSONAS);
+    printf("\nTotal de reservas realizadas: %d\n", totalReservas);
+    printf("Total de cancelaciones realizadas: %d\n", totalCancelaciones);
+
+    return 0;
+}
