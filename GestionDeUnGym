@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 
 int main() {
     // Bloque declarativo de constantes
@@ -39,14 +40,15 @@ int main() {
         switch (opcion1) {
             case 1: // Sección para reservar clases
                 printf("\nSeleccione la clase a reservar\n");
-                printf("Y/y. Yoga\n");
-                printf("P/p. Pilates\n");
-                printf("S/s. Spinning\n");
+                printf("Y. Yoga\n");
+                printf("P. Pilates\n");
+                printf("S. Spinning\n");
                 printf("\nSeleccione una clase: ");
                 scanf(" %c", &opcion);
+                opcion= toupper(opcion);
 
                 switch (opcion) {
-                    case 'Y': case 'y':
+                    case 'Y': 
                         espacioDisponible = MAXPERSONAS - yogaOcupados;
                         if (espacioDisponible > 0) {
                             yogaOcupados++;
@@ -57,7 +59,7 @@ int main() {
                         }
                         break;
 
-                    case 'P': case 'p':
+                    case 'P': 
                         espacioDisponible = MAXPERSONAS - pilatesOcupados;
                         if (espacioDisponible > 0) {
                             pilatesOcupados++;
@@ -68,7 +70,7 @@ int main() {
                         }
                         break;
 
-                    case 'S': case 's':
+                    case 'S': 
                         espacioDisponible = MAXPERSONAS - spinningOcupados;
                         if (espacioDisponible > 0) {
                             spinningOcupados++;
@@ -87,14 +89,15 @@ int main() {
 
             case 2: // Sección para cancelar clases
                 printf("\nSeleccione la clase a cancelar:\n");
-                printf("Y/y. Yoga\n");
-                printf("P/p. Pilates\n");
-                printf("S/s. Spinning\n");
-                printf("Seleccione una opción: ");
+                printf("Y. Yoga\n");
+                printf("P. Pilates\n");
+                printf("S. Spinning\n");
+                printf("\nSeleccione una clase: ");
                 scanf(" %c", &opcion);
+                opcion= toupper(opcion);
 
                 switch (opcion) {
-                    case 'Y': case 'y':
+                    case 'Y': 
                         if (yogaOcupados > 0) {
                             yogaOcupados--;
                             totalCancelaciones++;
@@ -104,7 +107,7 @@ int main() {
                         }
                         break;
 
-                    case 'P': case 'p':
+                    case 'P': 
                         if (pilatesOcupados > 0) {
                             pilatesOcupados--;
                             totalCancelaciones++;
@@ -114,7 +117,7 @@ int main() {
                         }
                         break;
 
-                    case 'S': case 's':
+                    case 'S': 
                         if (spinningOcupados > 0) {
                             spinningOcupados--;
                             totalCancelaciones++;
